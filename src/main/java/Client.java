@@ -1,9 +1,8 @@
 public class Client {
-    private String url;
-    private WordBrain wordBrain;
+    private final WordBrain wordBrain;
 
-    public Client(String url){
-        this.url = url;
+    public Client(){
+        wordBrain = new WordBrain();
     }
 
     //eval the input and call proper method
@@ -23,6 +22,7 @@ public class Client {
     }
 
     private String processGuess(String guess){
+
         return guess;
     }
 

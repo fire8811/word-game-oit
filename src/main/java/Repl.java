@@ -1,12 +1,10 @@
 import java.util.Scanner;
 
 public class Repl {
-    private final String url;
     private final Client client;
 
-    public Repl(String url){
-        this.url = url;
-        client = new Client(url);
+    public Repl(){
+        client = new Client();
     }
 
     public void run(){
