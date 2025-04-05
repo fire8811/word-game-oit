@@ -15,6 +15,8 @@ import java.util.Random;
 public class WordBrain {
     private int lives = 7;
     private String word;
+    private ArrayList<String> prevGuesses = new ArrayList<>();
+    private ArrayList<Character> chars;
     //private static final String URL = "https://api.datamuse.com/words?sp=?????&max=5";
 
     public WordBrain() {
@@ -22,8 +24,33 @@ public class WordBrain {
         System.out.println("WORD: " + word);
     }
 
+    public String processGuess(String guess){
+        //correct guess
+        if(word.contains(guess) && !prevGuesses.contains(guess)){
+            prevGuesses.add(guess);
+            return "CORRECT";
+        }
+        //bad guesses
+        if (prevGuesses.contains(guess)){
+            return ("You already guessed " + guess + "!");
+        }
+        else if(!word.contains(guess)){ //incorrect guess
+            lives--;
+            prevGuesses.add(guess);
+
+            if (lives == 0){ //end game
+                return "\nGAME OVER! The word was " + word + ".";
+            }
+
+            return "\nINCORRECT";
+        }
+
+        return "ERROR";
+    }
+
+
     private String getRandomWord() {
-        String json =  sendRequest();
+        String json = sendRequest();
         ArrayList<String> wordList = getWordList(json);
 
         return wordList.get(new Random().nextInt(wordList.size())); //select random word from list
@@ -76,7 +103,13 @@ public class WordBrain {
         return words;
     }
 
-    public String getWord(){
-        return null;
+    public int getLives() {
+        return lives;
+    }
+
+    public void newGame() {
+        word = getRandomWord();
+        prevGuesses = new ArrayList<String>();
+        lives = 7;
     }
 }
