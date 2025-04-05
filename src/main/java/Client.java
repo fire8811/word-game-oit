@@ -1,5 +1,5 @@
 public class Client {
-    private final WordBrain wordBrain;
+    private WordBrain wordBrain;
     private GameStatus gameStatus;
 
     public enum GameStatus {
@@ -9,7 +9,6 @@ public class Client {
     }
 
     public Client(){
-        wordBrain = new WordBrain();
         gameStatus = GameStatus.PREGAME;
     }
 
@@ -69,12 +68,18 @@ public class Client {
     }
 
     private String evalPregame(String command) {
-        if (command.equals("go")){
+        if (command.equals("easy")){
             gameStatus = GameStatus.GAME;
+            wordBrain = new WordBrain("easy");
+            return "Game starts now!";
+        }
+        else if (command.equals("hard")){
+            gameStatus = GameStatus.GAME;
+            wordBrain = new WordBrain("hard");
             return "Game starts now!";
         }
         else {
-            return "I'm not sure what that means. Type 'go' to start or 'quit' to quit!";
+            return "I'm not sure what that means. Type 'easy'/'hard' to start or 'quit' to quit!";
         }
     }
 

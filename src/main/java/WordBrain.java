@@ -4,24 +4,29 @@ import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.*;
 
-import com.google.gson.Gson;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Random;
 
 public class WordBrain {
     private int lives = 7;
     private int hintsRemaining = 1;
+    private boolean easy;
     private String word;
     private ArrayList<String> prevGuesses = new ArrayList<>();
     private ArrayList<String> wordDisplay = new ArrayList<>(); //displays the correct guesses made by the user (starts as blank spaces)
-    //private static final String URL = "https://api.datamuse.com/words?sp=?????&max=5";
 
-    public WordBrain() {
+    public WordBrain(String mode) {
+        if (mode.equals("easy")){
+            easy = true;
+        }
+        else{
+            easy = false;
+        }
+
         this.word = getRandomWord();
         wordDisplay = getBlankWord();
         System.out.println("WORD: " + word);
@@ -30,7 +35,9 @@ public class WordBrain {
 
     private ArrayList<String> getBlankWord() {
         ArrayList<String> arrayList = new ArrayList<>();
-        for(int i=0; i<5; i++){
+        int wordSize = easy ? 4 : 6;
+
+        for(int i=0; i < wordSize; i++){
             arrayList.add("_");
         }
         return arrayList;
@@ -69,13 +76,12 @@ public class WordBrain {
     }
 
     private void updateWordDisplay(String guess) {
-        for(int i = 0; i < 5; i++){
+        for(int i = 0; i < wordDisplay.size(); i++){
             if (guess.equals(String.valueOf(word.charAt(i)))){
                 wordDisplay.set(i, guess);
             }
         }
     }
-
 
     private String getRandomWord() {
         String json = sendRequest();
@@ -87,7 +93,7 @@ public class WordBrain {
     //fetch 1000 words from API and return String of the response JSON
     private String sendRequest()  {
         try {
-            URL url = (new URI("https://api.datamuse.com/words?sp=?????&max=1000").toURL());
+            URL url = (new URI(getUrlString()).toURL());
             HttpURLConnection http = (HttpURLConnection) url.openConnection();
             http.setRequestMethod("GET");
 
@@ -113,6 +119,16 @@ public class WordBrain {
             System.out.println(e.getMessage());
         }
         return "";
+    }
+
+    private String getUrlString() {
+        if(easy == true){
+            return "https://api.datamuse.com/words?sp=????&max=1000";
+        }
+        else {
+            return  "https://api.datamuse.com/words?sp=??????&max=1000";
+        }
+
     }
 
     //extract words from JSON

@@ -12,7 +12,7 @@ public class Repl {
         System.out.println("Welcome to Not Wordle!");
         System.out.println("======================");
         System.out.println("Guess a letter up to 7 times to find the hidden word!");
-        System.out.println("Quit anytime with 'quit'. Reveal 1 letter with 'hint'. Type 'go' to start!");
+        System.out.println("Quit anytime with 'quit'. Reveal 1 letter with 'hint'. \nType 'easy' for easy mode and 'hard' for hard mode!");
 
         Scanner scanner = new Scanner(System.in);
         var result = "";
@@ -20,21 +20,17 @@ public class Repl {
         while(!result.equals("GOODBYE!")) {
             if(client.getGameStatus() == Client.GameStatus.GAME){
                 System.out.println(client.printWordDisplay());
-                System.out.print("LIVES: " + client.getLives());
+                System.out.println("LIVES: " + client.getLives());
             }
             else if(client.getGameStatus() == Client.GameStatus.POSTGAME){
                 System.out.println("Play again? (y/n)");
             }
 
-            System.out.print("\n\nINPUT: ");
+            System.out.print("\nINPUT: ");
             String input = scanner.nextLine();
 
             result = client.eval(input);
             System.out.println(result);
-
-
-
-
         }
     }
 }

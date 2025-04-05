@@ -7,6 +7,7 @@
     <list default="true" id="cf6b3344-446d-4c50-b547-c8cfb36f7de6" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/Client.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Client.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Repl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Repl.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/WordBrain.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/WordBrain.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -88,5 +89,16 @@
       <updated>1743810620535</updated>
     </task>
     <servers />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/WordBrain.java</url>
+          <line>78</line>
+          <option name="timeStamp" value="2" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
 </project>
