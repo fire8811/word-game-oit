@@ -4,4 +4,4 @@ Installation:
 
 1. Clone the github repository and cd into the file
 2. Ensure JDK and Maven are installed
-3. run `mvn compile exec:java -Dexec.mainClass="Main"`   
+3. run `mvn compile exec:java -Dexec.mainClass="Main"` in the command line
