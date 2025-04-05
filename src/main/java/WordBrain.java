@@ -24,7 +24,6 @@ public class WordBrain {
 
         this.word = getRandomWord();
         wordDisplay = getBlankWord();
-        System.out.println("WORD: " + word);
     }
 
     public String processGuess(String guess){
@@ -124,7 +123,7 @@ public class WordBrain {
         }
     }
 
-    //extract words from JSON
+    //extract words from JSON into arrayList of words
     private static ArrayList<String> getWordList(String jsonString) {
         JsonArray jsonArray = JsonParser.parseString(jsonString).getAsJsonArray(); //Turn JSON string into Array
 
@@ -136,7 +135,6 @@ public class WordBrain {
             words.add(l.get("word").getAsString());
         }
 
-        System.out.println(words);
         return words;
     }
 
