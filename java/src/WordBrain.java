@@ -1,8 +1,8 @@
 public class WordBrain {
-    String url;
-    int lives = 7;
+    private final String url;
+    private int lives = 7;
 
     public WordBrain(String url){
-
+        this.url = url;
     }
 }
