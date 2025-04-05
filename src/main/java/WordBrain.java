@@ -15,6 +15,7 @@ import java.util.Random;
 
 public class WordBrain {
     private int lives = 7;
+    private int hintsRemaining = 1;
     private String word;
     private ArrayList<String> prevGuesses = new ArrayList<>();
     private ArrayList<String> wordDisplay = new ArrayList<>(); //displays the correct guesses made by the user (starts as blank spaces)
@@ -62,13 +63,17 @@ public class WordBrain {
     //update the wordDisplay to store the correctly guessed letter
     //finds the index of the correct letter and updates the corresponding index in wordDisplay
     private String correctGuess(String guess) {
+        updateWordDisplay(guess);
+
+        return "\nCORRECT";
+    }
+
+    private void updateWordDisplay(String guess) {
         for(int i = 0; i < 5; i++){
             if (guess.equals(String.valueOf(word.charAt(i)))){
                 wordDisplay.set(i, guess);
             }
         }
-
-        return "\nCORRECT";
     }
 
 
@@ -135,6 +140,7 @@ public class WordBrain {
         wordDisplay = getBlankWord();
         prevGuesses = new ArrayList<String>();
         lives = 7;
+        hintsRemaining = 1;
     }
 
     public String printWordDisplay() {
@@ -152,5 +158,29 @@ public class WordBrain {
             return true;
         }
         return false;
+    }
+
+    //update wordDisplay to show one of the word's letters
+    public String showHint() {
+        if (hintsRemaining == 0) {
+            return "You already used your hint!";
+        }
+
+        String hint = null;
+        while (hint == null){
+            String letter = String.valueOf(word.charAt(new Random().nextInt(wordDisplay.size())));
+            if (!prevGuesses.contains(letter)){
+                hint = letter;
+                updateWordDisplay(hint);
+                prevGuesses.add(hint);
+                hintsRemaining = 0;
+            }
+        }
+
+        return "Here's a hint for you";
+    }
+
+    public String getWord() {
+        return word;
     }
 }

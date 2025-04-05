@@ -49,7 +49,7 @@ public class Client {
 
     private String evalGame(String command) {
         if (command.equals("hint")) {
-            return showHint();
+            return wordBrain.showHint();
         }
         else if (command.matches("[a-z]")) {
             String result = processGuess(command);
@@ -58,7 +58,7 @@ public class Client {
                 gameStatus = GameStatus.POSTGAME;
             }
             else if (wordBrain.gameWon()) {
-                result += "\nYOU WON!";
+                result += "\nYOU WON!\nWord was " + wordBrain.getWord() + ".";
                 gameStatus = GameStatus.POSTGAME;
             }
             return result;
@@ -81,10 +81,6 @@ public class Client {
     private String processGuess(String guess){
 
         return wordBrain.processGuess(guess);
-    }
-
-    private String showHint(){
-        return "SHOW HINT";
     }
 
     public int getLives() {
