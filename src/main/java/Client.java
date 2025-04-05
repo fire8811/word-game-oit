@@ -57,6 +57,10 @@ public class Client {
             if(wordBrain.getLives() == 0){ //game ends in loss
                 gameStatus = GameStatus.POSTGAME;
             }
+            else if (wordBrain.gameWon()) {
+                result += "\nYOU WON!";
+                gameStatus = GameStatus.POSTGAME;
+            }
             return result;
         }
         else {

@@ -59,19 +59,16 @@ public class WordBrain {
         return "ERROR";
     }
 
+    //update the wordDisplay to store the correctly guessed letter
+    //finds the index of the correct letter and updates the corresponding index in wordDisplay
     private String correctGuess(String guess) {
-        String returnString = "CORRECT";
-
-        //update the wordDisplay to show the correctly guessed letter
-        //finds the index of the correct letter and updates the corresponding index in wordDisplay
         for(int i = 0; i < 5; i++){
             if (guess.equals(String.valueOf(word.charAt(i)))){
-                System.out.println(guess);
                 wordDisplay.set(i, guess);
             }
         }
 
-        return returnString;
+        return "\nCORRECT";
     }
 
 
@@ -147,5 +144,13 @@ public class WordBrain {
         }
 
         return returnString;
+    }
+
+    //game has been won if no blank spaces are in the wordDisplay ArrayList
+    public boolean gameWon(){
+        if(!wordDisplay.contains("_")){
+            return true;
+        }
+        return false;
     }
 }

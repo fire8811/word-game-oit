@@ -6,7 +6,6 @@
   <component name="ChangeListManager">
     <list default="true" id="cf6b3344-446d-4c50-b547-c8cfb36f7de6" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/src/main/java/Client.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Client.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Repl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Repl.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/WordBrain.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/WordBrain.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />

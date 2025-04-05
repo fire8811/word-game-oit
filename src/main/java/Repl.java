@@ -19,14 +19,14 @@ public class Repl {
 
         while(!result.equals("GOODBYE!")) {
             if(client.getGameStatus() == Client.GameStatus.GAME){
-                System.out.println("\n" + client.printWordDisplay());
-                System.out.println("LIVES: " + client.getLives());
+                System.out.println(client.printWordDisplay());
+                System.out.print("LIVES: " + client.getLives());
             }
             else if(client.getGameStatus() == Client.GameStatus.POSTGAME){
                 System.out.println("Play again? (y/n)");
             }
 
-            System.out.print("\nINPUT: ");
+            System.out.print("\n\nINPUT: ");
             String input = scanner.nextLine();
 
             result = client.eval(input);
