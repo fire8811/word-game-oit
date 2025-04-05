@@ -10,25 +10,36 @@ import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Random;
 
 public class WordBrain {
     private int lives = 7;
     private String word;
     private ArrayList<String> prevGuesses = new ArrayList<>();
-    private ArrayList<Character> chars;
+    private ArrayList<String> wordDisplay = new ArrayList<>(); //displays the correct guesses made by the user (starts as blank spaces)
     //private static final String URL = "https://api.datamuse.com/words?sp=?????&max=5";
 
     public WordBrain() {
         this.word = getRandomWord();
+        wordDisplay = getBlankWord();
         System.out.println("WORD: " + word);
+    }
+
+
+    private ArrayList<String> getBlankWord() {
+        ArrayList<String> arrayList = new ArrayList<>();
+        for(int i=0; i<5; i++){
+            arrayList.add("_");
+        }
+        return arrayList;
     }
 
     public String processGuess(String guess){
         //correct guess
         if(word.contains(guess) && !prevGuesses.contains(guess)){
             prevGuesses.add(guess);
-            return "CORRECT";
+            return correctGuess(guess);
         }
         //bad guesses
         if (prevGuesses.contains(guess)){
@@ -46,6 +57,21 @@ public class WordBrain {
         }
 
         return "ERROR";
+    }
+
+    private String correctGuess(String guess) {
+        String returnString = "CORRECT";
+
+        //update the wordDisplay to show the correctly guessed letter
+        //finds the index of the correct letter and updates the corresponding index in wordDisplay
+        for(int i = 0; i < 5; i++){
+            if (guess.equals(String.valueOf(word.charAt(i)))){
+                System.out.println(guess);
+                wordDisplay.set(i, guess);
+            }
+        }
+
+        return returnString;
     }
 
 
@@ -109,7 +135,17 @@ public class WordBrain {
 
     public void newGame() {
         word = getRandomWord();
+        wordDisplay = getBlankWord();
         prevGuesses = new ArrayList<String>();
         lives = 7;
+    }
+
+    public String printWordDisplay() {
+        String returnString = "";
+        for(int i = 0; i < wordDisplay.size(); i++){
+            returnString += (wordDisplay.get(i) + " ");
+        }
+
+        return returnString;
     }
 }

@@ -19,7 +19,7 @@ public class Repl {
 
         while(!result.equals("GOODBYE!")) {
             if(client.getGameStatus() == Client.GameStatus.GAME){
-                System.out.println("\n _ _ _ _ _");
+                System.out.println("\n" + client.printWordDisplay());
                 System.out.println("LIVES: " + client.getLives());
             }
             else if(client.getGameStatus() == Client.GameStatus.POSTGAME){

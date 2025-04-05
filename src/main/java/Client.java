@@ -95,4 +95,8 @@ public class Client {
         return gameStatus;
     }
 
+    public String printWordDisplay(){
+        return wordBrain.printWordDisplay();
+    }
+
 }
