@@ -33,19 +33,24 @@ public class Client {
         return "ERROR: unknown game state! (something broke)";
     }
 
-    private String evalPostgame(String command) {
-        if (command.equals("y")){
+    //pregame UI
+    private String evalPregame(String command) {
+        if (command.equals("easy")){
             gameStatus = GameStatus.GAME;
-            wordBrain.newGame();
-            return "Game starts again!";
+            wordBrain = new WordBrain("easy");
+            return "Game starts now!";
         }
-        else if (command.equals("n")){
-            return endGame();
+        else if (command.equals("hard")){
+            gameStatus = GameStatus.GAME;
+            wordBrain = new WordBrain("hard");
+            return "Game starts now!";
         }
-
-        return "I'm not sure what that means...";
+        else {
+            return "I'm not sure what that means. Type 'easy'/'hard' to start or 'quit' to quit!";
+        }
     }
 
+    //ui for gameplay
     private String evalGame(String command) {
         if (command.equals("hint")) {
             return wordBrain.showHint();
@@ -67,24 +72,21 @@ public class Client {
         }
     }
 
-    private String evalPregame(String command) {
-        if (command.equals("easy")){
+    //postgame ui
+    private String evalPostgame(String command) {
+        if (command.equals("y")){
             gameStatus = GameStatus.GAME;
-            wordBrain = new WordBrain("easy");
-            return "Game starts now!";
+            wordBrain.newGame();
+            return "Game starts again!";
         }
-        else if (command.equals("hard")){
-            gameStatus = GameStatus.GAME;
-            wordBrain = new WordBrain("hard");
-            return "Game starts now!";
+        else if (command.equals("n")){
+            return endGame();
         }
-        else {
-            return "I'm not sure what that means. Type 'easy'/'hard' to start or 'quit' to quit!";
-        }
+
+        return "I'm not sure what that means...";
     }
 
     private String processGuess(String guess){
-
         return wordBrain.processGuess(guess);
     }
 
@@ -92,6 +94,7 @@ public class Client {
         return wordBrain.getLives();
     }
 
+    //ends the repl loop when returned
     private String endGame() {
         return "GOODBYE!";
     }
@@ -103,5 +106,4 @@ public class Client {
     public String printWordDisplay(){
         return wordBrain.printWordDisplay();
     }
-
 }

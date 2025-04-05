@@ -20,27 +20,11 @@ public class WordBrain {
     private ArrayList<String> wordDisplay = new ArrayList<>(); //displays the correct guesses made by the user (starts as blank spaces)
 
     public WordBrain(String mode) {
-        if (mode.equals("easy")){
-            easy = true;
-        }
-        else{
-            easy = false;
-        }
+        easy = mode.equals("easy");
 
         this.word = getRandomWord();
         wordDisplay = getBlankWord();
         System.out.println("WORD: " + word);
-    }
-
-
-    private ArrayList<String> getBlankWord() {
-        ArrayList<String> arrayList = new ArrayList<>();
-        int wordSize = easy ? 4 : 6;
-
-        for(int i=0; i < wordSize; i++){
-            arrayList.add("_");
-        }
-        return arrayList;
     }
 
     public String processGuess(String guess){
@@ -83,6 +67,16 @@ public class WordBrain {
         }
     }
 
+    private ArrayList<String> getBlankWord() {
+        ArrayList<String> arrayList = new ArrayList<>();
+        int wordSize = easy ? 4 : 6;
+
+        for(int i=0; i < wordSize; i++){
+            arrayList.add("_");
+        }
+        return arrayList;
+    }
+
     private String getRandomWord() {
         String json = sendRequest();
         ArrayList<String> wordList = getWordList(json);
@@ -109,8 +103,8 @@ public class WordBrain {
                 }
                 in.close();
 
-                String jsonString = jsonResponseData.toString(); //convert StringBuffer to String
-                return jsonString;
+                //convert StringBuffer to String
+                return jsonResponseData.toString();
 
             } else {
                 System.out.println(responseCode);
@@ -128,7 +122,6 @@ public class WordBrain {
         else {
             return  "https://api.datamuse.com/words?sp=??????&max=1000";
         }
-
     }
 
     //extract words from JSON
@@ -145,10 +138,6 @@ public class WordBrain {
 
         System.out.println(words);
         return words;
-    }
-
-    public int getLives() {
-        return lives;
     }
 
     public void newGame() {
@@ -168,15 +157,7 @@ public class WordBrain {
         return returnString;
     }
 
-    //game has been won if no blank spaces are in the wordDisplay ArrayList
-    public boolean gameWon(){
-        if(!wordDisplay.contains("_")){
-            return true;
-        }
-        return false;
-    }
-
-    //update wordDisplay to show one of the word's letters
+    //update wordDisplay to show one of the word's letters as a hint
     public String showHint() {
         if (hintsRemaining == 0) {
             return "You already used your hint!";
@@ -196,7 +177,16 @@ public class WordBrain {
         return "Here's a hint for you";
     }
 
+    //game has been won if no blank spaces are in the wordDisplay ArrayList
+    public boolean gameWon(){
+        return !wordDisplay.contains("_");
+    }
+
     public String getWord() {
         return word;
+    }
+
+    public int getLives() {
+        return lives;
     }
 }
